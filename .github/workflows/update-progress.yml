@@ -1,0 +1,51 @@
+name: Update Learning Progress
+
+on:
+  schedule:
+    # Runs every day at 12:30 UTC (6:00 PM IST)
+    - cron: "30 12 * * *"
+
+  # Allows you to test it manually
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update activity log
+        run: |
+          mkdir -p progress
+
+          DATE=$(TZ='Asia/Kolkata' date '+%Y-%m-%d')
+          TIME=$(TZ='Asia/Kolkata' date '+%I:%M %p IST')
+
+          if [ ! -f progress/activity.md ]; then
+            echo "# Learning Activity" > progress/activity.md
+            echo "" >> progress/activity.md
+            echo "| Date | Updated |" >> progress/activity.md
+            echo "|------|---------|" >> progress/activity.md
+          fi
+
+          echo "| $DATE | $TIME |" >> progress/activity.md
+
+      - name: Commit progress
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add progress/activity.md
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update learning activity"
+          git push
