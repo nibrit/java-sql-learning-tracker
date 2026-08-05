@@ -8,8 +8,8 @@ Programs and exercises covering Java fundamentals.
 - [✅] Variables and Data Types
 - [✅ ] Operators
 - [✅] Type Casting
-- [ ] Conditional Statements
-- [ ] Loops
+- [✅] Conditional Statements
+- [✅] Loops
 - [ ] Arrays
 - [ ] Strings
 - [ ] Methods
