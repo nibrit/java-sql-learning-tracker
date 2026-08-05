@@ -7,7 +7,7 @@ Programs and exercises covering Java fundamentals.
 
 - [✅] Variables and Data Types
 - [✅ ] Operators
-- [ ] Type Casting
+- [✅] Type Casting
 - [ ] Conditional Statements
 - [ ] Loops
 - [ ] Arrays
